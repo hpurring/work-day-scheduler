@@ -13,14 +13,19 @@ showCurrentDay();
 
 function updateTimeSlotItems() {
     //assign classes (past | present | future)
-    if (moment().isBefore(currentHour)) {
-        $("#hour-9").addClass("past");
-      } else if (moment().isAfter(currentHour)) {
-          $("#hour-9").addClass("future");
-      } else {
-          $("#hour-9").addClass("present");
-      };
-    };
+
+    $("time-block").each(function() {
+        if (moment().isBefore(currentHour)) {
+            $("time-block").addClass("past");
+          } else if (moment().isAfter(currentHour)) {
+              $("time-block").addClass("future");
+              $("time-block").removeClass("past", "present");
+          } else {
+              $("time-block").addClass("present");
+              $("time-block").removeClass("past", "future");
+          };
+    });
+};
    
     
 
