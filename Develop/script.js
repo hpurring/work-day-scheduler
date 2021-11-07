@@ -13,7 +13,7 @@ showCurrentDay();
 
 function updateTimeSlotItems() {
     //assign classes (past | present | future)
-
+    for (let i = 0; i < 9; i++) {
     $(".time-block").each(function() {
         if (moment().isBefore(currentHour)) {
             $(".time-block").addClass("past");
@@ -24,24 +24,28 @@ function updateTimeSlotItems() {
               $(".time-block").addClass("present");
               $(".time-block").removeClass("past", "future");
           };
-    });
+        });
+        $(".description").each(function() {
+            var hour = $(this).parent('.time-block').attr('id');
+            var value = localStorage.getItem(hour);
+            $(this).text(value);
+        });
+    };
 };
    
-    
-
-    //read relevant local storage data (about the relevant hour slot)
 
 function handleSave(e) {
-    var hour = $(e.target).siblings('.description').val();
-    var value = $(e.target).siblings('.description').val().trim();
-    localStorage.setItem(hour, value);
+    var value = $(e.target).siblings('.description').val();
+    var hour = $(e.target).parent('.time-block').attr('id');
+    console.log(hour, value)
+    localStorage.setItem(hour, value)
 };
 
 function main() {
     showCurrentDay();
     updateTimeSlotItems();
     // add click event to timeSlots
-    $(document).on('click', '.save-btn', handleSave);
+    $('.saveBtn').on('click', handleSave);
 }
 
-main();
+$(main);
