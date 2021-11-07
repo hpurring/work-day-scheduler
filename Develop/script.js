@@ -1,4 +1,3 @@
-var now = moment().format('MMMM Do YYYY, h:mm:ss a');
 var currentHour = moment().hour();
 var currentDay = document.querySelector("#currentDay");
 
@@ -11,18 +10,35 @@ var showCurrentDay = function() {
 
 showCurrentDay();
 
+// function updateTimeSlotItems() {
+//     var duration = Math.ceil(moment.duration(currentHour.diff(moment())).asHours());
+//     if (parseInt(duration) < 0) {
+//         $(this).next().addClass("past");
+//     } else if (parseInt(duration) === 0) {
+//         $(this).next().addClass("present");
+//     } else {
+//         $(this).next().addClass("future");
+//     }
+
+//     $(".description").each(function() {
+//     var hour = $(this).parent('.time-block').attr('id');
+//     var value = localStorage.getItem(hour);
+//     $(this).text(value);
+//     });
+// }
+
 function updateTimeSlotItems() {
     //assign classes (past | present | future)
-    for (let i = 0; i < 9; i++) {
-    $(".time-block").each(function() {
-        if (moment().isBefore(currentHour)) {
-            $(".time-block").addClass("past");
-          } else if (moment().isAfter(currentHour)) {
-              $(".time-block").addClass("future");
-              $(".time-block").removeClass("past", "present");
+    var hourBlock = parseInt($(this).attr('id').split('-'));
+    $(this).each(function() {
+        if (moment() > hourBlock) {
+            $(this).addClass("past");
+          } else if (moment() < hourBlock) {
+              $(this).addClass("future");
+              $(this).removeClass("past", "present");
           } else {
-              $(".time-block").addClass("present");
-              $(".time-block").removeClass("past", "future");
+              $(this).addClass("present");
+              $(this).removeClass("past", "future");
           };
         });
         $(".description").each(function() {
@@ -30,7 +46,6 @@ function updateTimeSlotItems() {
             var value = localStorage.getItem(hour);
             $(this).text(value);
         });
-    };
 };
    
 
