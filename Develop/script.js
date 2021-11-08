@@ -29,11 +29,13 @@ showCurrentDay();
 
 function updateTimeSlotItems() {
     //assign classes (past | present | future)
-    var hourBlock = parseInt($(this).attr('id').split('-'));
-    $(this).each(function() {
-        if (moment() > hourBlock) {
-            $(this).addClass("past");
-          } else if (moment() < hourBlock) {
+    // var timeBlock = document.querySelector(".time-block");
+    $(".time-block").each(function() {
+        var hourBlock = parseInt($(this).attr('id').split('-')[1]);
+        if (moment().hour() > hourBlock) {
+            $(this).addClass("past")
+            $(this).removeClass("present", "future");
+          } else if (moment().hour() < hourBlock) {
               $(this).addClass("future");
               $(this).removeClass("past", "present");
           } else {
