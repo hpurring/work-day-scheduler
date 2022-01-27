@@ -9,7 +9,7 @@ This project demonstrates how I can build basic schedule functionality using Jav
 View my page [here](https://hpurring.github.io/work-day-scheduler/).
 
 
-![landing page screenshot](assets/work-day-scheduler-screenshot.png) 
+![landing page screenshot](https://github.com/hpurring/work-day-scheduler/blob/main/Assets/work-day-scheduler-screenshot.png) 
 
 ## **Installation**
 None required.
