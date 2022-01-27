@@ -1,6 +1,7 @@
 var currentHour = moment().hour();
 var currentDay = document.querySelector("#currentDay");
 
+// show current day
 var showCurrentDay = function() {
     document.querySelector("#currentDay").innerHTML = 
     `
@@ -10,26 +11,8 @@ var showCurrentDay = function() {
 
 showCurrentDay();
 
-// function updateTimeSlotItems() {
-//     var duration = Math.ceil(moment.duration(currentHour.diff(moment())).asHours());
-//     if (parseInt(duration) < 0) {
-//         $(this).next().addClass("past");
-//     } else if (parseInt(duration) === 0) {
-//         $(this).next().addClass("present");
-//     } else {
-//         $(this).next().addClass("future");
-//     }
-
-//     $(".description").each(function() {
-//     var hour = $(this).parent('.time-block').attr('id');
-//     var value = localStorage.getItem(hour);
-//     $(this).text(value);
-//     });
-// }
-
+// determine whether time slots are in the past, present, or future
 function updateTimeSlotItems() {
-    //assign classes (past | present | future)
-    // var timeBlock = document.querySelector(".time-block");
     $(".time-block").each(function() {
         var hourBlock = parseInt($(this).attr('id').split('-')[1]);
         if (moment().hour() > hourBlock) {
@@ -50,7 +33,7 @@ function updateTimeSlotItems() {
         });
 };
    
-
+// add and save text to time slots
 function handleSave(e) {
     var value = $(e.target).siblings('.description').val();
     var hour = $(e.target).parent('.time-block').attr('id');
@@ -58,6 +41,7 @@ function handleSave(e) {
     localStorage.setItem(hour, value)
 };
 
+// start the app: show current day and update time slots
 function main() {
     showCurrentDay();
     updateTimeSlotItems();
@@ -65,4 +49,5 @@ function main() {
     $('.saveBtn').on('click', handleSave);
 }
 
+// launch
 $(main);
